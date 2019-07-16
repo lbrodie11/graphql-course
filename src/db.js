@@ -15,7 +15,7 @@ const users = [
     name: 'Mike',
     email: 'mike@example.com'
   }
-];
+]
 
 const posts = [
   {
@@ -39,7 +39,7 @@ const posts = [
     published: true,
     author: '2'
   }
-];
+]
 
 const comments = [
   {
@@ -66,12 +66,12 @@ const comments = [
     author: '3',
     post: '10'
   }
-];
+]
 
 const db = {
   users,
   posts,
   comments
-};
+}
 
-export { db as default };
+export { db as default }

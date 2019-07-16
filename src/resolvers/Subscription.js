@@ -2,7 +2,7 @@ import getUserId from '../utils/getUserId'
 
 const Subscription = {
   comment: {
-    subscribe(parent, { postId }, { prisma }, info) {
+    subscribe (parent, { postId }, { prisma }, info) {
       return prisma.subscription.comment({
         where: {
           node: {
@@ -15,7 +15,7 @@ const Subscription = {
     }
   },
   post: {
-    subscribe(parent, args, { prisma }, info) {
+    subscribe (parent, args, { prisma }, info) {
       return prisma.subscription.post({
         where: {
           node: {
@@ -26,7 +26,7 @@ const Subscription = {
     }
   },
   myPost: {
-    subscribe(parent, args, {prisma, request}, info){
+    subscribe (parent, args, { prisma, request }, info) {
       const userId = getUserId(request)
 
       return prisma.subscription.post({
@@ -40,6 +40,6 @@ const Subscription = {
       }, info)
     }
   }
-};
+}
 
-export { Subscription as default };
+export { Subscription as default }

@@ -1,13 +1,13 @@
 import getUserId from '../utils/getUserId'
 
 const Query = {
-  users(parent, args, { prisma }, info) {
+  users (parent, args, { prisma }, info) {
     const opArgs = {
       first: args.first,
       skip: args.skip,
       after: args.after,
       orderBy: args.orderBy
-    };
+    }
 
     if (args.query) {
       opArgs.where = {
@@ -19,9 +19,9 @@ const Query = {
       }
     }
 
-    return prisma.query.users(opArgs, info);
+    return prisma.query.users(opArgs, info)
   },
-  async myPosts(parent, args, {prisma, request}, info){
+  async myPosts (parent, args, { prisma, request }, info) {
     const userId = getUserId(request)
 
     const opArgs = {
@@ -36,17 +36,17 @@ const Query = {
       }
     }
 
-    if(args.query){
+    if (args.query) {
       opArgs.where.OR = [{
         title_contains: args.query
-      },{
+      }, {
         body_contains: args.query
       }]
     }
 
     return prisma.query.posts(opArgs, info)
   },
-  posts(parent, args, { prisma }, info) {
+  posts (parent, args, { prisma }, info) {
     const opArgs = {
       first: args.first,
       skip: args.skip,
@@ -67,18 +67,18 @@ const Query = {
         }
       ]
     }
-    return prisma.query.posts(opArgs, info);
+    return prisma.query.posts(opArgs, info)
   },
-  comments(parent, args, { prisma }, info) {
+  comments (parent, args, { prisma }, info) {
     const opArgs = {
       first: args.first,
       skip: args.skip,
       after: args.after,
       orderBy: args.orderBy
     }
-    return prisma.query.comments(opArgs, info);
+    return prisma.query.comments(opArgs, info)
   },
-  async me(parent, args, { prisma, request}, info) {
+  async me (parent, args, { prisma, request }, info) {
     const userId = getUserId(request)
 
     const user = await prisma.query.user({
@@ -88,9 +88,8 @@ const Query = {
     }, info)
 
     return user
-
   },
-  async post(parent, args, { prisma, request}, info) {
+  async post (parent, args, { prisma, request }, info) {
     const userId = getUserId(request, false)
 
     const posts = await prisma.query.posts({
@@ -106,7 +105,7 @@ const Query = {
       }
     }, info)
 
-    if(posts.length === 0){
+    if (posts.length === 0) {
       throw new Error('Post not found')
     }
 
